@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:44:39
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-18 16:47:04
+ * @Last Modified time: 2017-06-18 18:54:03
  */
 
 import chai from "chai"
@@ -151,5 +151,45 @@ describe('Game of life', function() {
 
             assert.isTrue(deadCell.nextState(deadBoard), "It's alive! It's aliiiiive!!");
         });
+
+        describe('Next board generation', function() {
+            it("Should get the new state for all dying cells", function() {
+                board.addCell(new Cell(0, 0, true));
+                board.nextGeneration();
+
+                assert.isFalse(board.getCell(0, 0).isAlive(), "Dead!");
+                assert.isFalse(board.getCell(1, 1).isAlive(), "Dead!");
+            });
+            it("Should get the new state for all living cells", function() {
+                board.addCell(new Cell(0, 0, true));
+                board.addCell(new Cell(1, 2, true));
+                board.nextGeneration();
+
+                assert.isFalse(board.getCell(0, 0).isAlive(), "Dead!");
+                assert.isTrue(board.getCell(1, 1).isAlive(), "Alive!");
+            });
+            it("Should get the new state for 9 cells", function() {
+                board.addCell(new Cell(0, 0, false));
+                board.addCell(new Cell(0, 1, true));
+                board.addCell(new Cell(0, 2, true));
+                board.addCell(new Cell(1, 0, true));
+                board.addCell(new Cell(1, 2, false));
+                board.addCell(new Cell(2, 0, false));
+                board.addCell(new Cell(2, 1, true));
+                board.addCell(new Cell(2, 2, true));
+                board.nextGeneration();
+
+                assert.isTrue(board.getCell(0, 0).isAlive(), "Like new!");
+                assert.isTrue(board.getCell(0, 1).isAlive(), "Alive!");
+                assert.isTrue(board.getCell(0, 2).isAlive(), "Alive!");
+                assert.isTrue(board.getCell(1, 0).isAlive(), "Alive!");
+                assert.isFalse(board.getCell(1, 1).isAlive(), "Dead!");
+                assert.isFalse(board.getCell(1, 2).isAlive(), "Dead!");
+                assert.isTrue(board.getCell(2, 0).isAlive(), "Like new!");
+                assert.isTrue(board.getCell(2, 1).isAlive(), "Alive!");
+                assert.isTrue(board.getCell(2, 2).isAlive(), "Alive!");
+            });
+        });
     });
+
 });
