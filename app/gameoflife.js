@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-18 15:15:40
+ * @Last Modified time: 2017-06-18 16:47:13
  */
 
 class Board {
@@ -10,7 +10,7 @@ class Board {
      * ["Game of life" board class]
      * @return {} [dictionary with all the cells added to the board]
      */
-    constructor() {
+    constructor () {
         // Sets the board structure with a dictionary.
         this.cells = {};
     }
@@ -50,6 +50,21 @@ class Board {
     }
 }
 
+/**
+ * Game of life transition rules
+ * Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
+ * Any live cell with two or three live neighbours lives on to the next generation.
+ * Any live cell with more than three live neighbours dies, as if by overpopulation.
+ * Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+ */
+
+const rules = {
+    0: false,
+    1: false,
+    2: true,
+    3: true,
+};
+
 class Cell {
     constructor(x, y, alive) {
         this.x = x;
@@ -58,6 +73,14 @@ class Cell {
     }
     isAlive() {
         return this.alive;
+    }
+    nextState(board) {
+        /**
+         * Returns true or false depending on the game of life rules.
+         * Uses the rules dictionary declared above,
+         * to hash the next state for the cell.
+         */
+        return rules[board.getLivingNeighbors(this)] || false;
     }
 }
 
