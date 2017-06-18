@@ -1,8 +1,8 @@
 /*
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
- * @Last Modified by:   alex
- * @Last Modified time: 2017-06-18 13:33:55
+ * @Last Modified by:   Alex Armenta
+ * @Last Modified time: 2017-06-18 15:15:40
  */
 
 class Board {
@@ -23,7 +23,25 @@ class Board {
         return this.cells[this.cellFormat(x, y)];
     }
     getLivingNeighbors(cell) {
-        return 0;
+        // Returns all the living cells around a given cell.
+        let x = cell.x;
+        let y = cell.y;
+        let livingCells = 0;
+        let currentCell;
+
+        // Find a way to refactor this without for loops (maybe recursion)
+        for (var i = -1; i <= 1; i++) {
+            for (var j = -1; j <= 1; j++) {
+                if (i === 0 && i == j) {
+                    continue;
+                }
+                currentCell = this.getCell(x + i, y + j);
+                currentCell && currentCell.isAlive() ? livingCells++ : 0;
+            }
+        }
+        // /////////////////////////////////////////////////////////////////
+
+        return livingCells;
     }
 
     cellFormat(x, y) {
