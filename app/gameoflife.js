@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-18 16:47:13
+ * @Last Modified time: 2017-06-18 18:55:25
  */
 
 class Board {
@@ -10,7 +10,7 @@ class Board {
      * ["Game of life" board class]
      * @return {} [dictionary with all the cells added to the board]
      */
-    constructor () {
+    constructor() {
         // Sets the board structure with a dictionary.
         this.cells = {};
     }
@@ -21,6 +21,10 @@ class Board {
     getCell(x, y) {
         // Returns a cell at the given coordinates x and y.
         return this.cells[this.cellFormat(x, y)];
+    }
+    cellFormat(x, y) {
+        // Defines the cell format e.g. x1y1
+        return "x" + x + "y" + y;
     }
     getLivingNeighbors(cell) {
         // Returns all the living cells around a given cell.
@@ -43,11 +47,22 @@ class Board {
 
         return livingCells;
     }
-
-    cellFormat(x, y) {
-        // Defines the cell format e.g. x1y1
-        return "x" + x + "y" + y;
+    nextGeneration() {
+        /**
+         * Updates each cell of the board with its new state
+         * to get the next board generation
+         */
+        // Find another way to update the board without cloning a cell and adding it to a temp board
+        let newBoard = {};
+        for (let c in this.cells) {
+            let cell = this.cells[c];
+            let newCell = cell.clone();
+            newCell.alive = cell.nextState(this);
+            newBoard[c] = newCell;
+        }
+        this.cells = newBoard;
     }
+
 }
 
 /**
@@ -57,15 +72,21 @@ class Board {
  * Any live cell with more than three live neighbours dies, as if by overpopulation.
  * Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
  */
-
 const rules = {
     0: false,
     1: false,
     2: true,
     3: true,
 };
+//
 
 class Cell {
+    /**
+     * [Cell class]
+     * @param  {[type]} x     [horizontal position on the board]
+     * @param  {[type]} y     [vertical position on the board]
+     * @param  {[type]} alive [Current cell status (Alive=true, Dead=false)]
+     */
     constructor(x, y, alive) {
         this.x = x;
         this.y = y;
@@ -81,6 +102,9 @@ class Cell {
          * to hash the next state for the cell.
          */
         return rules[board.getLivingNeighbors(this)] || false;
+    }
+    clone() {
+        return new Cell(this.x, this.y, this.alive);
     }
 }
 
