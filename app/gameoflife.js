@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-18 20:50:52
+ * @Last Modified time: 2017-06-18 23:42:01
  */
 
 class Board {
@@ -31,8 +31,8 @@ class Board {
         // Find a way to refactor this without for loops (recursion?)
         for (var i = -1; i <= 1; i++) {
             for (var j = -1; j <= 1; j++) {
-                let currentCell = (i === 0 && j === 0) ? false : this.getCell(cell.x + i, cell.y + j);
-                currentCell && currentCell.isAlive() ? livingCells++ : 0;
+                let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
+                (currentCell && currentCell.isAlive()) && livingCells++;
             }
         }
         return livingCells;
