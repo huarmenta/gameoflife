@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:44:39
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-18 18:54:03
+ * @Last Modified time: 2017-06-19 23:06:55
  */
 
 import chai from "chai"
@@ -191,5 +191,11 @@ describe('Game of life', function() {
             });
         });
     });
-
+    describe('Create new board', function() {
+        it("Should create a 10x10 board with random alive cells", function() {
+            let board = new Board();
+            board.createBoard(10, 10);
+            assert.isNotFalse(board.getCell(10, 10), "Great! Cell created and found!");
+        })
+    });
 });
