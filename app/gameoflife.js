@@ -2,12 +2,13 @@
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-18 23:42:01
+ * @Last Modified time: 2017-06-19 23:02:56
  */
 
 class Board {
     /**
      * ["Game of life" board class]
+     * @param  {[object]} cells [Object to store all the board cells]
      */
     constructor() {
         // Sets the board structure with a dictionary.
@@ -19,24 +20,36 @@ class Board {
     }
     getCell(x, y) {
         // Returns a cell at the given coordinates x and y.
-        return this.cells[this.formattedCell(x, y)];
+        return this.cells[this.formattedCell(x, y)] || false;
     }
     formattedCell(x, y) {
         // Defines the cell format e.g. x0x0, x0y1, x1y1
         return "x" + x + "y" + y;
     }
     getLivingNeighbors(cell) {
-        // Returns all the living cells around a given cell.
-        let livingCells = 0;
-        // Find a way to refactor this without for loops (recursion?)
-        for (var i = -1; i <= 1; i++) {
-            for (var j = -1; j <= 1; j++) {
-                let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
-                (currentCell && currentCell.isAlive()) && livingCells++;
+            // Returns all the living cells around a given cell.
+            let livingCells = 0;
+            // Find a way to refactor this without for loops (recursion?)
+            for (var i = -1; i <= 1; i++) {
+                for (var j = -1; j <= 1; j++) {
+                    let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
+                    (currentCell && currentCell.isAlive()) && livingCells++;
+                }
             }
+            return livingCells;
         }
-        return livingCells;
-    }
+        /*getLivingNeighbors(cell) {
+            return this.getLivingNeighborsRec(cell, -1, -1, 0);
+        }
+        getLivingNeighborsRec(cell, i, j, acc) {
+            console.log(i, j);
+            if (i === 1 && j === 1) {
+                return acc;
+            }
+            let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
+            (currentCell && currentCell.isAlive()) && acc++;
+            return this.getLivingNeighborsRec(cell, i <= j ? i+1 : i, j < i ? j+1 : j, acc);
+        }*/
     nextGeneration() {
         /**
          * Updates each cell of the board with its new state
@@ -51,6 +64,14 @@ class Board {
             newBoard[c] = newCell;
         }
         this.cells = newBoard;
+    }
+    createBoard(rows, cols) {
+        // Fills a board with random alive cells
+        for (let x = 0; x <= rows; x++) {
+            for (let y = 0; y <= cols; y++) {
+                this.addCell(new Cell(x, y, (Math.random() > 0.8)));
+            }
+        }
     }
 }
 
@@ -72,9 +93,9 @@ const rules = {
 class Cell {
     /**
      * [Cell class]
-     * @param  {[type]} x     [horizontal position on the board]
-     * @param  {[type]} y     [vertical position on the board]
-     * @param  {[type]} alive [Current cell status (Alive=true, Dead=false)]
+     * @param  {[integer]} x     [horizontal position on the board]
+     * @param  {[integer]} y     [vertical position on the board]
+     * @param  {[boolean]} alive [Current cell status (Alive=true, Dead=false)]
      */
     constructor(x, y, alive) {
         this.x = x;
