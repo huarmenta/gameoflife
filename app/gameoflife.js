@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-19 23:02:56
+ * @Last Modified time: 2017-06-19 23:11:29
  */
 
 class Board {
@@ -27,29 +27,31 @@ class Board {
         return "x" + x + "y" + y;
     }
     getLivingNeighbors(cell) {
-            // Returns all the living cells around a given cell.
-            let livingCells = 0;
-            // Find a way to refactor this without for loops (recursion?)
-            for (var i = -1; i <= 1; i++) {
-                for (var j = -1; j <= 1; j++) {
-                    let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
-                    (currentCell && currentCell.isAlive()) && livingCells++;
-                }
+        // Returns all the living cells around a given cell.
+        let livingCells = 0;
+        // Find a way to refactor this without for loops (recursion?)
+        for (var i = -1; i <= 1; i++) {
+            for (var j = -1; j <= 1; j++) {
+                let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
+                (currentCell && currentCell.isAlive()) && livingCells++;
             }
-            return livingCells;
         }
-        /*getLivingNeighbors(cell) {
-            return this.getLivingNeighborsRec(cell, -1, -1, 0);
+        return livingCells;
+    }
+
+    /*getLivingNeighbors(cell) {
+        return this.getLivingNeighborsRec(cell, -1, -1, 0);
+    }
+    getLivingNeighborsRec(cell, i, j, acc) {
+        console.log(i, j);
+        if (i === 1 && j === 1) {
+            return acc;
         }
-        getLivingNeighborsRec(cell, i, j, acc) {
-            console.log(i, j);
-            if (i === 1 && j === 1) {
-                return acc;
-            }
-            let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
-            (currentCell && currentCell.isAlive()) && acc++;
-            return this.getLivingNeighborsRec(cell, i <= j ? i+1 : i, j < i ? j+1 : j, acc);
-        }*/
+        let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
+        (currentCell && currentCell.isAlive()) && acc++;
+        return this.getLivingNeighborsRec(cell, i <= j ? i+1 : i, j < i ? j+1 : j, acc);
+    }*/
+
     nextGeneration() {
         /**
          * Updates each cell of the board with its new state
