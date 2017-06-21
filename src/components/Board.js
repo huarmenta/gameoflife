@@ -5,33 +5,19 @@
  * @Last Modified time: 2017-06-20 21:55:26
  */
 import React from 'react';
-import Board from '../app/gameoflife.js'
-import Cell from '../app/gameoflife.js'
+import {Board} from "../app/gameoflife.js"
+import CellComponent from './Cell.js'
 
-'use strict';
+const board = new Board(10, 10); // Initialize board of 10x10 cells
+board.createBoard(); // create board
+
+const cells = Object.keys(board.cells).map(key => {
+  return <CellComponent id={key} key={key} />
+});
 
 class BoardComponent extends React.Component {
     render() {
-        return (
-            <div className="board">
-                <div className="row">
-                    <div className="cell">
-                    </div>
-                    <div className="cell">
-                    </div>
-                    <div className="cell">
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="cell">
-                    </div>
-                    <div className="cell">
-                    </div>
-                    <div className="cell">
-                    </div>
-                </div>
-            </div>
-        );
+        return <div className="board">{cells}</div>;
     }
 }
 
