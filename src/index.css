@@ -17,10 +17,13 @@ body {
 .cell {
     width: 10px;
     height: 10px;
-    background-color: #FFFFFF;
     border: 1px solid #AFAFAF;
+    background-color: #FFFFFF;
     display: table-cell;
 }
 .row {
     display: table-row;
+}
+.alive {
+  background-color: #64DDBB;
 }
