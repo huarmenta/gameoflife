@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-19 23:11:29
+ * @Last Modified time: 2017-06-20 21:06:20
  */
 
 class Board {
@@ -120,7 +120,7 @@ class Cell {
     }
 }
 
-export {
+export default {
     Board,
     Cell
 }

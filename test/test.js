@@ -2,14 +2,14 @@
  * @Author: alex
  * @Date:   2017-06-17 16:44:39
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-19 23:06:55
+ * @Last Modified time: 2017-06-20 21:05:25
  */
 
 import chai from "chai"
 import {
     Board,
     Cell
-} from "../app/gameoflife.js"
+} from "../src/app/gameoflife.js"
 
 const assert = chai.assert;
 

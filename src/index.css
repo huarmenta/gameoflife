@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+#root {
+    padding: 40px;
+    margin: 0 auto;
+}
+.board {
+    background-color: #B7FFF2;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    display: table;
+}
+.cell {
+    width: 10px;
+    height: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #AFAFAF;
+    display: table-cell;
+}
+.row {
+    display: table-row;
+}
