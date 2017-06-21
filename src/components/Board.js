@@ -12,11 +12,28 @@ const board = new Board(10, 10); // Initialize board of 10x10 cells
 board.createBoard(); // create board
 
 const cells = Object.keys(board.cells).map(key => {
-  return <CellComponent id={key} key={key} />
+    let aliveClass = board.cells[key].isAlive() ? " alive": "";
+    return <CellComponent id={key} key={key} className={`cell${aliveClass}`}></CellComponent>;
 });
 
-class BoardComponent extends React.Component {
+
+class Row extends React.Component {
     render() {
+      return <div className="row" id=""></div>;
+    }
+}
+
+class BoardComponent extends React.Component {
+    board() {
+      let board = new Board(10, 10);
+      board.createBoard(); // create board
+      return board;
+    }
+    cells() {
+
+    }
+    render() {
+        board = this.board();
         return <div className="board">{cells}</div>;
     }
 }

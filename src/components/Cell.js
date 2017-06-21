@@ -8,7 +8,7 @@ import React from 'react';
 
 class CellComponent extends React.Component {
     render() {
-        return <div className="cell"></div>;
+        return <div id={this.props.id} className={this.props.className}></div>;
     }
 }
 
