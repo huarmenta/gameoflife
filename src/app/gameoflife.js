@@ -10,9 +10,11 @@ class Board {
      * ["Game of life" board class]
      * @param  {[object]} cells [Object to store all the board cells]
      */
-    constructor() {
+    constructor(rows=50, cols=50) {
         // Sets the board structure with a dictionary.
         this.cells = {};
+        this.rows = rows;
+        this.cols = cols;
     }
     addCell(cell) {
         // Adds a new cell to the board.
@@ -67,10 +69,10 @@ class Board {
         }
         this.cells = newBoard;
     }
-    createBoard(rows, cols) {
+    createBoard() {
         // Fills a board with random alive cells
-        for (let x = 0; x <= rows; x++) {
-            for (let y = 0; y <= cols; y++) {
+        for (let x = 0; x <= this.rows; x++) {
+            for (let y = 0; y <= this.cols; y++) {
                 this.addCell(new Cell(x, y, (Math.random() > 0.8)));
             }
         }
@@ -120,7 +122,7 @@ class Cell {
     }
 }
 
-export default {
+export {
     Board,
     Cell
 }
