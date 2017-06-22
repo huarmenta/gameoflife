@@ -4,5 +4,8 @@ import BoardComponent from './components/Board'
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-ReactDOM.render(<BoardComponent />, document.getElementById('root'));
+
+// Render board component
+let board = (<BoardComponent className="board"/>);
+ReactDOM.render(board, document.getElementById('root'));
 registerServiceWorker();
