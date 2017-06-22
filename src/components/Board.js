@@ -11,11 +11,11 @@ import CellComponent from "./Cell"
 class BoardComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.board = new Board(10, 10);
+        this.board = new Board(50, 50);
         this.board.createBoard();
         this.state = {cells: this.board.cells}
     }
-    componentDidMount() {
+    /*componentDidMount() {
         this.timerID = setInterval(() => this.tick(), 1000);
     }
     componentWillUnmount() {
@@ -24,14 +24,28 @@ class BoardComponent extends React.Component {
     tick() {
         this.board.nextGeneration();
         this.setState({cells: this.board.cells});
-    }
-    cells() {
-        return Object.keys(this.state.cells).map((key) => {
-            return <CellComponent id={key} key={key} cell={this.state.cells[key]}/>;
-        });
+    }*/
+    rowCells() {
+      let rows = [...Array(this.board.rows).keys()];
+      let cols = [...Array(this.board.rows).keys()];
+      return rows.map((row) => {
+       return <div key={row} className="row">
+          {
+            cols.map((col) => {
+              let cell = this.board.getCell(row, col);
+              return <CellComponent id={cell.getFormatteCell()} key={cell.getFormatteCell()} cell={cell}/>
+            })
+          }
+          </div>
+
+      })
     }
     render() {
-        return <div id="board" className={this.props.className}>{this.cells()}</div>;
+        return (
+            <div id="board" className={this.props.className}>
+                {this.rowCells()}
+            </div>
+        );
     }
 }
 

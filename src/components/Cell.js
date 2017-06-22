@@ -11,20 +11,20 @@ class CellComponent extends React.Component {
     constructor(props){
         super(props);
         this.cell = props.cell;
-        this.state = {isAlive: this.cell.alive };
+        this.state = {isAlive: this.cell.isAlive()};
         this.invertAlive = this.invertAlive.bind(this);
     }
     invertAlive() {
         this.cell.alive = !this.cell.alive;
-        this.setState({isAlive: this.cell.alive});
+        this.setState({isAlive: this.cell.isAlive()});
     }
     render() {
         let classnames = classNames("cell", this.state.isAlive ? "alive" : "");
         return (
-                <div id={this.props.id}
-                    className={classnames}
-                    onClick={this.invertAlive}/>
-            );
+            <div id={this.props.id}
+                className={classnames}
+                onClick={this.invertAlive}/>
+        );
     }
 }
 
