@@ -2,40 +2,26 @@
  * @Author: Alex Armenta
  * @Date:   2017-06-20 20:48:35
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-20 21:55:26
+ * @Last Modified time: 2017-06-21 22:49:07
  */
 import React from 'react';
 import {Board} from "../app/gameoflife.js"
-import CellComponent from './Cell.js'
-
-const board = new Board(10, 10); // Initialize board of 10x10 cells
-board.createBoard(); // create board
-
-const cells = Object.keys(board.cells).map(key => {
-    let aliveClass = board.cells[key].isAlive() ? " alive": "";
-    return <CellComponent id={key} key={key} className={`cell${aliveClass}`}></CellComponent>;
-});
-
-
-class Row extends React.Component {
-    render() {
-      return <div className="row" id=""></div>;
-    }
-}
+import CellComponent from "./Cell"
 
 class BoardComponent extends React.Component {
-    board() {
-      let board = new Board(10, 10);
-      board.createBoard(); // create board
-      return board;
+    constructor(props) {
+        super(props);
+        this.board = new Board(10, 10);
+        this.board.createBoard();
     }
     cells() {
-
+        return Object.keys(this.board.cells).map((key) => {
+            return <CellComponent id={key} key={key} cell={this.board.cells[key]}/>;
+        });
     }
     render() {
-        board = this.board();
-        return <div className="board">{cells}</div>;
+        return <div className={this.props.className}>{this.cells()}</div>;
     }
 }
 
-export default BoardComponent
+export default BoardComponent;
