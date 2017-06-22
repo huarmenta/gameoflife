@@ -8,4 +8,5 @@ import './index.css';
 // Render board component
 let board = (<BoardComponent className="board"/>);
 ReactDOM.render(board, document.getElementById('root'));
+
 registerServiceWorker();

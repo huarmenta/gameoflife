@@ -9,7 +9,7 @@ body {
 }
 .board {
     background-color: #ECF0F1;
-    width: 1000px;
+    width: 500px;
     height: 500px;
     margin: 0 auto;
     display: table;
