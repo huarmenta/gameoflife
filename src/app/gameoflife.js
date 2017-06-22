@@ -18,13 +18,13 @@ class Board {
     }
     addCell(cell) {
         // Adds a new cell to the board.
-        this.cells[this.formattedCell(cell.x, cell.y)] = cell;
+        this.cells[this.formatCell(cell.x, cell.y)] = cell;
     }
     getCell(x, y) {
         // Returns a cell at the given coordinates x and y.
-        return this.cells[this.formattedCell(x, y)] || false;
+        return this.cells[this.formatCell(x, y)] || false;
     }
-    formattedCell(x, y) {
+    formatCell(x, y) {
         // Defines the cell format e.g. x0x0, x0y1, x1y1
         return "x" + x + "y" + y;
     }
@@ -71,8 +71,8 @@ class Board {
     }
     createBoard() {
         // Fills a board with random alive cells
-        for (let x = 0; x <= this.rows; x++) {
-            for (let y = 0; y <= this.cols; y++) {
+        for (let x = 0; x < this.rows; x++) {
+            for (let y = 0; y < this.cols; y++) {
                 this.addCell(new Cell(x, y, (Math.random() > 0.8)));
             }
         }
@@ -120,7 +120,10 @@ class Cell {
     clone() {
         return new Cell(this.x, this.y, this.alive);
     }
-
+    getFormatteCell() {
+        // Defines the cell format e.g. x0x0, x0y1, x1y1
+        return "x" + this.x + "y" + this.y;
+    }
 }
 
 export {
