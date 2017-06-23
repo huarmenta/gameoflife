@@ -2,6 +2,7 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: 'Playfair Display', serif;
+  font-size: 14px;
 }
 #root {
   position: relative;
@@ -10,15 +11,22 @@ html, body {
 }
 #top_left {
   position: absolute;
-  height: 75%;
+  height: 100%;
   width: 50%;
-  /*background-color: #EE3B3C;*/
-  background-color: #EB6361;
+}
+#top_left_div{
+  position: absolute;
+  height: 95%;
+  width: 100%;
+}
+#buttons_div {
+  text-align: center;
+  color: #FFF;
 }
 #top_right {
   position: absolute;
   left: 50%;
-  height: 50%;
+  height: 30%;
   width: 50%;
   background-color: #F9BA2D;
 }
@@ -32,18 +40,11 @@ html, body {
   align-items: center;
   font-size: 50px;
 }
-#bottom_left {
-  position: absolute;
-  top: 75%;
-  height: 25%;
-  width: 50%;
-  background-color: #D6DCE4;
-}
 #bottom_right {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
-  height: 50%;
+  height: 70%;
   width: 50%;
   background-color: #FFFFFF;
 }
@@ -61,11 +62,9 @@ html, body {
 .board {
   background-color: #F79B57;
   display: table;
-  height: 90%;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 35px;
-  border: 1px solid #EB6361;
+  height: 80%;
+  width: 70%;
+  margin: 30px auto;
 }
 .cell {
   border: 1px solid #ECF0F1;
@@ -79,3 +78,31 @@ html, body {
   background-color: #000;
 }
 /**/
+.button {
+  width: 60px;
+  color: #FFF;
+  margin: 5px;
+  height: 25px;
+  width: 80px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+.play {
+  border: 1px solid #127557;
+  background-color: #127557;
+}
+.stop {
+  border: 1px solid #F9BA2D;
+  background-color: #F9BA2D;
+}
+.step {
+  border: 1px solid #272B4C;
+  background-color: #272B4C;
+}
+.clear {
+  border: 1px solid #FFF;
+  background-color: #FFF;
+  color: #000;
+}
