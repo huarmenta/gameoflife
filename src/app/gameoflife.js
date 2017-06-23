@@ -2,7 +2,7 @@
  * @Author: alex
  * @Date:   2017-06-17 16:24:13
  * @Last Modified by:   Alex Armenta
- * @Last Modified time: 2017-06-21 22:01:24
+ * @Last Modified time: 2017-06-23 00:37:26
  */
 
 class Board {
@@ -10,7 +10,7 @@ class Board {
      * ["Game of life" board class]
      * @param  {[object]} cells [Object to store all the board cells]
      */
-    constructor(rows=50, cols=50) {
+    constructor(rows = 50, cols = 50) {
         // Sets the board structure with a dictionary.
         this.cells = {};
         this.rows = rows;
@@ -40,20 +40,6 @@ class Board {
         }
         return livingCells;
     }
-
-    /*getLivingNeighbors(cell) {
-        return this.getLivingNeighborsRec(cell, -1, -1, 0);
-    }
-    getLivingNeighborsRec(cell, i, j, acc) {
-        console.log(i, j);
-        if (i === 1 && j === 1) {
-            return acc;
-        }
-        let currentCell = !(i === 0 && j === 0) && this.getCell(cell.x + i, cell.y + j);
-        (currentCell && currentCell.isAlive()) && acc++;
-        return this.getLivingNeighborsRec(cell, i <= j ? i+1 : i, j < i ? j+1 : j, acc);
-    }*/
-
     nextGeneration() {
         /**
          * Updates each cell of the board with its new state
@@ -71,11 +57,19 @@ class Board {
     }
     createBoard() {
         // Fills a board with random alive cells
-        for (let x = 0; x < this.rows; x++) {
-            for (let y = 0; y < this.cols; y++) {
-                this.addCell(new Cell(x, y, (Math.random() > 0.8)));
-            }
-        }
+        let rows = [...Array(this.rows).keys()];
+        let cols = [...Array(this.cols).keys()];
+        rows.forEach(x => { 
+            cols.forEach(y => this.addCell(new Cell(x, y, (Math.random() > 0.7))))
+        });
+    }
+    clearBoard() {
+        // Sets all alive cells to dead cells
+        Object.keys(this.cells).filter(key => {
+            return this.cells[key].alive;
+        }).map(key => {
+            this.cells[key].alive = !this.cells[key].alive;
+        });
     }
 }
 
@@ -86,10 +80,13 @@ class Board {
  * Any live cell with more than three live neighbours dies, as if by overpopulation.
  * Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
  */
-const rules = {
+const alive_rules = {
     0: false,
     1: false,
     2: true,
+    3: true,
+};
+const dead_rules = {
     3: true,
 };
 //
@@ -112,15 +109,15 @@ class Cell {
     nextState(board) {
         /**
          * Returns true or false depending on the game of life rules.
-         * Uses the rules dictionary declared above,
+         * Uses the rules dictionaries declared above,
          * to hash the next state for the cell.
          */
-        return rules[board.getLivingNeighbors(this)] || false;
+        return this.alive ? Boolean(alive_rules[board.getLivingNeighbors(this)]) : Boolean(dead_rules[board.getLivingNeighbors(this)]);
     }
     clone() {
         return new Cell(this.x, this.y, this.alive);
     }
-    getFormatteCell() {
+    getFormattedCell() {
         // Defines the cell format e.g. x0x0, x0y1, x1y1
         return "x" + this.x + "y" + this.y;
     }
