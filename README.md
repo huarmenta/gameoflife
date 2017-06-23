@@ -53,15 +53,13 @@ Installing the dependencies
 npm install
 ```
 
-## Running the tests
-
-Run tests
+## Test
+Running tests
 ```
 npm run test
 ```
 
-### Run the game
-
+### Play the game
 This will start a server on localhost:3000 to visualize the game
 ```
 npm start
