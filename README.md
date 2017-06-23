@@ -69,7 +69,7 @@ npm start
 ## Built With
 
 * [ReactJS](https://facebook.github.io/react/) - The web framework used
-* [ES6](https://developer.mozilla.org/es/docs/Web/JavaScript/Novedades_en_JavaScript/ECMAScript_6_support_in_Mozilla) - Dependency Management
+* [ES6](https://developer.mozilla.org/es/docs/Web/JavaScript/Novedades_en_JavaScript/ECMAScript_6_support_in_Mozilla) - Javascript
 
 ## Authors
 
