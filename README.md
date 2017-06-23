@@ -13,3 +13,68 @@ The "game" is a zero-player game, meaning that its evolution is determined by it
 * Any live cell with two or three live neighbours lives on to the next generation.
 * Any live cell with more than three live neighbours dies, as if by overpopulation.
 * Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+
+### Installing
+
+Follow the instructions to run the game properly
+
+
+Installing node/npm (or any package manager of your choice)
+
+```
+sudo apt-get install nodejs
+```
+Check npm version
+```
+node -v
+npm -v
+```
+
+Installing GIT
+
+```
+sudo apt-get install git
+```
+Check GIT version
+```
+git --version
+```
+
+Getting a copy of the repository
+```
+git clone https://github.com/alexharmenta/gameoflife
+```
+```
+cd gameoflife
+```
+
+Installing the dependencies
+```
+npm install
+```
+
+## Running the tests
+
+Run tests
+```
+npm run test
+```
+
+### Run the game
+
+This will start a server on localhost:3000 to visualize the game
+```
+npm start
+```
+
+
+## Built With
+
+* [ReactJS](https://facebook.github.io/react/) - The web framework used
+* [ES6](https://developer.mozilla.org/es/docs/Web/JavaScript/Novedades_en_JavaScript/ECMAScript_6_support_in_Mozilla) - Dependency Management
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
