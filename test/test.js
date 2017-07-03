@@ -197,5 +197,15 @@ describe('Game of life', function() {
             board.createBoard(10, 10);
             assert.isNotFalse(board.getCell(10, 10), "Great! Cell created and found!");
         })
+        it("Should verify if the board has only dead cells", function() {
+            let board = new Board();
+            board.createBoard(10, 10);
+            board.clear(); // sets alive cells to dead
+            let deadCount = Object.keys(board.cells).reduce((total, elem) => {
+                !board.cells[elem].isAlive() && total++;
+                return total;
+            }, 0);
+            assert.equal(Object.keys(board.cells).length, deadCount, "Great! Cell created and found!");
+        })
     });
 });

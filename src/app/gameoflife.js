@@ -18,15 +18,15 @@ class Board {
     }
     addCell(cell) {
         // Adds a new cell to the board.
-        this.cells[this.formatCell(cell.x, cell.y)] = cell;
+        this.cells[cell.getKey()] = cell;
     }
     getCell(x, y) {
         // Returns a cell at the given coordinates x and y.
-        return this.cells[this.formatCell(x, y)] || false;
+        return this.cells[this.getCellKey(x, y)] || false;
     }
-    formatCell(x, y) {
+    getCellKey(x, y) {
         // Defines the cell format e.g. x0x0, x0y1, x1y1
-        return "x" + x + "y" + y;
+        return `x${x}y${y}`;
     }
     getLivingNeighbors(cell) {
         // Returns all the living cells around a given cell.
@@ -59,17 +59,15 @@ class Board {
         // Fills a board with random alive cells
         let rows = [...Array(this.rows).keys()];
         let cols = [...Array(this.cols).keys()];
-        rows.forEach(x => { 
+        rows.forEach(x => {
             cols.forEach(y => this.addCell(new Cell(x, y, (Math.random() > 0.7))))
         });
     }
-    clearBoard() {
+    clear() {
         // Sets all alive cells to dead cells
         Object.keys(this.cells).filter(key => {
-            return this.cells[key].alive;
-        }).map(key => {
-            this.cells[key].alive = !this.cells[key].alive;
-        });
+            return this.cells[key].isAlive();
+        }).map(key => { this.cells[key].setAlive(false) });
     }
 }
 
@@ -97,14 +95,22 @@ class Cell {
      * @param  {[integer]} x     [horizontal position on the board]
      * @param  {[integer]} y     [vertical position on the board]
      * @param  {[boolean]} alive [Current cell status (Alive=true, Dead=false)]
+     * @param  {[string]} key    [Defines a unique key to simplify search on board cells attribute]
      */
     constructor(x, y, alive) {
         this.x = x;
         this.y = y;
         this.alive = alive;
+        this.key = this.formatKey();
     }
     isAlive() {
         return this.alive;
+    }
+    setAlive(alive) {
+        this.alive = alive;
+    }
+    getKey() {
+      return this.key;
     }
     nextState(board) {
         /**
@@ -117,9 +123,9 @@ class Cell {
     clone() {
         return new Cell(this.x, this.y, this.alive);
     }
-    getFormattedCell() {
-        // Defines the cell format e.g. x0x0, x0y1, x1y1
-        return "x" + this.x + "y" + this.y;
+    formatKey() {
+        // Defines the cell key format e.g. x0x0, x0y1, x1y1
+        return `x${this.x}y${this.y}`;
     }
 }
 
