@@ -34,7 +34,7 @@ class BoardComponent extends React.Component {
     }
     setCellAlive(cell) {
         // This method sets the new alive attribute to a cell and changes its state.
-        this.state.board.cells[cell.getFormattedCell()].alive = !this.state.board.cells[cell.getFormattedCell()].alive;
+        this.state.board.cells[cell.getKey()].setAlive(!this.state.board.cells[cell.getKey()].isAlive());
         this.setState({board: this.state.board});
     }
     playBoard() {
@@ -53,7 +53,7 @@ class BoardComponent extends React.Component {
     }
     clearBoard() {
         // Sets all the alive cells to dead cells.
-        this.state.board.clearBoard();
+        this.state.board.clear();
         this.setState(
             {
                 board: this.state.board,
@@ -83,8 +83,8 @@ class BoardComponent extends React.Component {
                     cols.map(col => {
                         let cell = this.state.board.getCell(row, col);
                         return  (
-                            <CellComponent id={cell.getFormattedCell}
-                                key={cell.getFormattedCell()}
+                            <CellComponent id={cell.getKey}
+                                key={cell.getKey()}
                                 cell={cell}
                                 onCellClick={this.setCellAlive}/>
                         )
