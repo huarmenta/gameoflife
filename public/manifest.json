@@ -11,6 +11,7 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
+  "lang": "en-US",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
