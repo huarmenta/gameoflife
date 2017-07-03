@@ -1,6 +1,7 @@
 {
   "short_name": "Game of life",
   "name": "John Conway's Game of life",
+  "description": "This is a John Conway's game of life JS/React implementation",
   "icons": [
     {
       "src": "favicon.ico",
